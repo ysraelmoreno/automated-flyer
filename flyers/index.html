@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Faça seu flyer de qualificação para iniciar sua trajetória na 01Company!">
+    <meta name="author" content="01 Company">
+    <meta name="keywords" content="marketing multinivel, flyer, qualificação, rede">
+    <meta name="robots" content="index,nofollow">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link href="./stylesheets/index.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="./images/static/logo-preto.png" />
+    <title>Crie seu flyer de qualificação</title>
+    <script src="https://kit.fontawesome.com/91a0d9e8ca.js" crossorigin="anonymous"></script>
+    <script src="./javascripts/main.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id="form">
+      <a id="return" href="../index.html"><i class="fas fa-angle-left"></i></a>
+      <img loading="lazy" src="./images/static/branco.png" id="logo" />
+
+      <h1>Faça seu flyer de qualificação agora</h1>
+      <label>Nome</label>
+      <input type="text" id="name" placeholder="Digite seu nome" />
+      <br>
+      <label id="foto">Envie sua foto</label>
+      <input type="file" id="teste" accept=".jpg, .jpeg, .png" />
+      <p>*Envie uma foto quadrada de preferência</p>
+      <br>
+
+      <label id="foto">Altere o tamanho da sua foto:</label>
+      <input type="range" id="positionX" value="500" min="0" max="1000" />
+      <p id="size">500</p>
+
+      <br>
+
+      <label id="grad">Graduação</label>
+      <select id="imagens">
+        <option value="bemvindo" selected>Bem vindo</option>
+        <option value="start">Start</option>
+        <option value="platinum">Platinum</option>
+        <option value="ruby">Ruby</option>
+        <option value="saphire">Saphire</option>
+        <option value="diamond">Diamond</option>
+        <option value="superlider">Super Leader</option>
+        <option value="1mes">Team Leader 1º Mês</option>
+        <option value="2mes">Team Leader 2º Mês</option>
+        <option value="3mes">Team Leader 3º Mês</option>
+        <option value="4mes">Team Leader 4º Mês</option>
+        <option value="5mes">Team Leader 5º Mês</option>
+        <option value="6mes">Team Leader 6º Mês</option>
+        <option value="7mes">Team Leader 7º Mês</option>
+        <option value="8mes">Team Leader 8º Mês</option>
+        <option value="9mes">Team Leader 9º Mês</option>
+        <option value="10mes">Team Leader 10º Mês</option>
+        <option value="11mes">Team Leader 11º Mês</option>
+        <option value="12mes">Team Leader 12º Mês</option>
+      </select>
+      <button onclick="download()">
+        Download
+      </button>
+    </div>
+    <div id="cnv">
+      <img src="#" id="placeholder" style="display: none" />
+
+      <canvas id="c" crossorigin="anonymous"></canvas>
+
+    </div>
+
+    <script type="text/javascript">
+      let canvas = document.querySelector("#c");
+      let file = document.querySelector("#teste");
+      let username = document.querySelector("#name");
+      let placeholder = document.querySelector("#placeholder");
+      let select = document.querySelector("#imagens");
+      let rangeX = document.querySelector("#positionX");
+      let size = document.querySelector("#size");
+
+      let ctx = canvas.getContext("2d");
+      let bandeiraCustomizada = new Image(720, 1280);
+      let imageRangeX = 500
+
+      bandeiraCustomizada.onload = demo;
+      bandeiraCustomizada.src = "./images/bemvindo.png";
+      file.oninput = render;
+      username.oninput = render;
+      rangeX.oninput = render;
+
+      rangeX.addEventListener('change', (event) => {
+        imageRangeX = parseInt(event.target.value);
+        size.innerHTML = imageRangeX;
+      })
+
+      select.addEventListener("change", (event) => {
+        bandeiraCustomizada.src = `./images/${event.target.value}.png`
+      })
+
+      file.addEventListener("change", (event) => {
+        const fileList = event.target.files;
+
+        for (const file of fileList) {
+          // Check if the file is an image.
+          if (file.type && file.type.indexOf("image") === -1) {
+            console.log("File is not an image.", file.type, file);
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.addEventListener("load", (event) => {
+            const imgContent = event.target.result;
+            placeholder.src = imgContent
+            render();
+          });
+          reader.readAsDataURL(file);
+        }
+      });
+
+      function download() {
+        var image = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
+        var link = document.createElement('a');
+        link.download = "flyer-de-qualificação.png";
+        link.href = image;
+        link.click();
+      }
+    </script>
+  </body>
+</html>

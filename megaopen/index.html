@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Faça seu flyer de qualificação para iniciar sua trajetória na 01Company!">
+    <meta name="author" content="01 Company">
+    <meta name="keywords" content="marketing multinivel, flyer, qualificação, rede">
+    <meta name="robots" content="index,nofollow">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <link href="./stylesheets/index.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="./images/static/logo-preto.png" />
+    <title>Crie seu flyer de qualificação</title>
+    <script src="./javascripts/main.js" type="text/javascript"></script>
+    <script src="https://kit.fontawesome.com/91a0d9e8ca.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div id="form">
+      <a id="return" href="../index.html"><i class="fas fa-angle-left"></i></a>
+      <h1>Faça seu flyer de Open</h1>
+      <h3>Localização</h3>
+      <input type="text" id="local" placeholder="Local" />
+      <input type="text" id="address" placeholder="Endereço" />
+      <input type="text" id="city" placeholder="Cidade e Estado" />
+      <input type="text" id="date" placeholder="Data e horário do evento" />
+
+      <br>
+      <h3>Participantes</h3>
+      <div>
+        <h5>Quantos pessoas  irão participar da Open?</h5>
+        <input type="radio" checked name="palestrantes" id="1pessoa" value="1pessoa">
+        <label for="1pessoa">1 pessoa</label>
+        <input type="radio" name="palestrantes" id="2pessoas" value="2pessoas">
+        <label for="2pessoas">2 pessoas</label>
+        <input type="radio" name="palestrantes" id="3pessoas" value="3pessoas">
+        <label for="3pessoas">3 pessoas</label>
+      </div>
+
+      <input type="text" id="name" placeholder="Nome Completo do palestrante" />
+      <select class="imagens" id="pin1">
+        <option value="bemvindo" disabled selected>Qualificação</option>
+        <option value="start">Start</option>
+        <option value="platinum">Platinum</option>
+        <option value="ruby">Ruby</option>
+        <option value="saphire">Saphire</opn>
+        <option value="diamond">Diamond</option>
+        <option value="doublediamond">Double Diamond</option>
+        <option value="royaldiamond">Royal Diamond</option>
+        <option value="imperialblack">Imperial Black</option>
+        <option value="titanium">Titanium</option>
+
+      </select>
+
+      <label id="btnLabel" class="btnLabel" for="image1"><i class="fas fa-cloud-upload-alt icons"></i> Enviar foto do primeiro palestrante</label>
+      <input type="file" id="image1" accept=".jpg, .jpeg, .png"/>
+      <br>
+
+      <input type="range" id="positionX1" value="500" min="0" max="1000" />
+      <p id="size1">500</p>
+
+      <input type="text" id="palestrante2" placeholder="Nome Completo do segundo palestrante" style="display: none;" />
+      <select class="imagens" id="pin2">
+        <option value="bemvindo" disabled selected>Qualificação</option>
+        <option value="start">Start</option>
+        <option value="platinum">Platinum</option>
+        <option value="ruby">Ruby</option>
+        <option value="saphire">Saphire</opn>
+        <option value="diamond">Diamond</option>
+        <option value="doublediamond">Double Diamond</option>
+        <option value="royaldiamond">Royal Diamond</option>
+        <option value="imperialblack">Imperial Black</option>
+        <option value="titanium">Titanium</option>
+
+      </select>
+
+      <label id="btnLabel2" class="btnLabel" for="image2"><i class="fas fa-cloud-upload-alt"></i> Enviar foto do segundo palestrante</label>
+      <input type="file" id="image2" accept=".jpg, .jpeg, .png" />
+      <br>
+      <input type="range" id="positionX2" value="500" min="0" max="1000" />
+      <p id="size2">500</p>
+
+      <input type="text" id="palestrante3" placeholder="Nome Completo do terceiro palestrante" style="display: none;"/>
+      <select class="imagens" id="pin3">
+        <option value="bemvindo" disabled selected>Qualificação</option>
+        <option value="start">Start</option>
+        <option value="platinum">Platinum</option>
+        <option value="ruby">Ruby</option>
+        <option value="saphire">Saphire</opn>
+        <option value="diamond">Diamond</option>
+        <option value="doublediamond">Double Diamond</option>
+        <option value="royaldiamond">Royal Diamond</option>
+        <option value="imperialblack">Imperial Black</option>
+        <option value="titanium">Titanium</option>
+
+      </select>
+
+
+      <label id="btnLabel3" class="btnLabel" for="image3"><i class="fas fa-cloud-upload-alt"></i> Enviar foto do terceiro palestrante</label>
+      <input type="file" id="image3" accept=".jpg, .jpeg, .png"/>
+      <br>
+
+      <input type="range" id="positionX3" value="500" min="0" max="1000" />
+      <p id="size3">500</p>
+
+      <button onclick="download()">
+        Download
+      </button>
+    </div>
+    <div id="cnv">
+      <img src="#" id="placeholder1" style="display: none" />
+      <img src="#" id="placeholder2" style="display: none" />
+      <img src="#" id="placeholder3" style="display: none" />
+
+      <canvas id="c" crossorigin="anonymous"></canvas>
+
+    </div>
+
+    <script type="text/javascript">
+      var canvas = document.querySelector("#c");
+      var formDiv = document.querySelector("#form")
+      var file1 = document.querySelector("#image1");
+      var file2 = document.querySelector("#image2");
+      var file3 = document.querySelector("#image3");
+
+      var labelsFile1 = document.querySelector("#btnLabel")
+      var labelsFile2 = document.querySelector("#btnLabel2")
+      var labelsFile3 = document.querySelector("#btnLabel3")
+
+      var username = document.querySelector("#name");
+      var userName2 = document.querySelector("#palestrante2");
+      var userName3 = document.querySelector("#palestrante3");
+
+      var local = document.querySelector("#local");
+      var city = document.querySelector("#city");
+      var address = document.querySelector("#address");
+      var date = document.querySelector("#date");
+
+      var placeholder1 = document.querySelector("#placeholder1");
+      var placeholder2 = document.querySelector("#placeholder2");
+      var placeholder3 = document.querySelector("#placeholder3");
+
+      var select = document.querySelector("#pin1");
+      var select2 = document.querySelector("#pin2");
+      var select3 = document.querySelector("#pin3");
+
+      var rangeX1 = document.querySelector("#positionX1");
+      var rangeX2 = document.querySelector("#positionX2");
+      var rangeX3 = document.querySelector("#positionX3");
+
+      var size1 = document.querySelector("#size1");
+      var size2 = document.querySelector("#size2");
+      var size3 = document.querySelector("#size3");
+
+      let ctx = canvas.getContext("2d");
+      let bandeiraCustomizada = new Image(720, 1280);
+      let imageRangeX1 = 500
+      let imageRangeX2 = 500
+      let imageRangeX3 = 500
+
+      let radios = document.getElementsByName("palestrantes")
+
+      bandeiraCustomizada.onload = demo;
+      bandeiraCustomizada.src = "./images/1pessoa.png";
+
+      let pin = new Image(200, 200);
+
+      pin.onload = demo;
+      pin.src = "./images/start.png"
+
+      let pin2 = new Image(200, 200);
+
+      pin2.onload = demo;
+      pin2.src = "./images/start.png"
+
+      let pin3 = new Image(200, 200);
+
+      pin3.onload = demo;
+      pin3.src = "./images/start.png"
+
+      select.addEventListener("change", (event) => {
+        pin.src = `./images/${event.target.value}.png`
+      });
+
+      select2.addEventListener("change", (event) => {
+        pin2.src = `./images/${event.target.value}.png`
+      });
+
+      select3.addEventListener("change", (event) => {
+        pin3.src = `./images/${event.target.value}.png`
+      });
+
+      // Render images
+      file1.oninput = render;
+      file2.oninput = render;
+      file3.oninput = render;
+
+      username.oninput = render;
+      userName2.oninput = render;
+      userName3.oninput = render;
+
+      city.oninput = render;
+      address.oninput = render;
+      date.oninput = render;
+      local.oninput = render;
+
+      rangeX1.addEventListener('change', (event) => {
+        imageRangeX1 = parseInt(event.target.value);
+        size1.innerHTML = imageRangeX1;
+      });
+
+      rangeX2.addEventListener('change', (event) => {
+        imageRangeX2 = parseInt(event.target.value);
+        size2.innerHTML = imageRangeX2;
+      });
+
+      rangeX3.addEventListener('change', (event) => {
+        imageRangeX3 = parseInt(event.target.value);
+        size3.innerHTML = imageRangeX3;
+      });
+
+      rangeX1.oninput = render;
+      rangeX2.oninput = render;
+      rangeX3.oninput = render;
+
+      file1.addEventListener("change", (event) => {
+        const fileList = event.target.files;
+
+        console.log(fileList)
+
+        for (const file of fileList) {
+          // Check if the file is an image.
+          if (file.type && file.type.indexOf("image") === -1) {
+            console.log("File is not an image.", file.type, file);
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.addEventListener("load", (event) => {
+            const imgContent = event.target.result;
+            placeholder1.src = imgContent
+            render();
+          });
+          reader.readAsDataURL(file);
+        }
+      });
+
+      file2.addEventListener("change", (event) => {
+        const fileList = event.target.files;
+
+        console.log(fileList)
+
+        for (const file of fileList) {
+          // Check if the file is an image.
+          if (file.type && file.type.indexOf("image") === -1) {
+            console.log("File is not an image.", file.type, file);
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.addEventListener("load", (event) => {
+            const imgContent = event.target.result;
+            placeholder2.src = imgContent
+            render();
+          });
+          reader.readAsDataURL(file);
+        }
+      });
+
+      file3.addEventListener("change", (event) => {
+        const fileList = event.target.files;
+
+        console.log(fileList)
+
+        for (const file of fileList) {
+          // Check if the file is an image.
+          if (file.type && file.type.indexOf("image") === -1) {
+            console.log("File is not an image.", file.type, file);
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.addEventListener("load", (event) => {
+            const imgContent = event.target.result;
+            placeholder3.src = imgContent
+            render();
+          });
+          reader.readAsDataURL(file);
+        }
+      });
+
+
+
+      function download() {
+        var image = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
+        var link = document.createElement('a');
+
+        link.download = "flyer-de-qualificação.png";
+        link.href = image;
+        link.click();
+      }
+    </script>
+  </body>
+</html>

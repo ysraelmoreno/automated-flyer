@@ -1,0 +1,66 @@
+#main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    height: 100vh;
+    background-image: url('../assets/capa.jpg');
+    background-color: #02042B;
+    background-size: 100%;
+}
+
+#main h1 {
+    color: #00f7ff;
+}
+
+ul {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.menuitem {
+    padding: 10px 20px;
+    background-color: #006dfc5d;
+    border-radius: 5px;
+    display: inline-block;
+    transition: all 0.2s ease-in-out;
+}
+
+.menuitem2 {
+    padding: 10px 20px;
+    background-color: #006dfc5d;
+    border-radius: 5px;
+    margin-left: 30px;
+    display: inline-block;
+    transition: all 0.2s ease-in-out;
+}
+
+.menuitem:hover {
+    background-color: #005ed8cc;
+}
+
+.menuitem2:hover {
+    background-color: #005ed8cc;
+}
+ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+@media (max-width: 1024px){
+    #main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        height: 100vh;
+        background-image: url('../assets/capa.jpg');
+        background-color: #02042B;
+        background-size: cover;
+        background-position: center;
+    }
+
+}
